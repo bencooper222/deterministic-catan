@@ -12,6 +12,22 @@ const fillTable = randomGen => {
     const roll = () => Math.floor(randomGen() * 6) + 1;
     const thisRoll = roll() + roll();
     cell.innerHTML = thisRoll;
+
+    cell.addEventListener('click', ()=>{
+        if(cell.style.backgroundColor==='white'){
+            cell.style.backgroundColor = 'black';
+            cell.style.color = 'white';
+        }
+        else if(cell.style.backgroundColor ==='black'){
+            cell.style.backgroundColor = 'white';
+            cell.style.color = 'black';
+        }
+        else{
+            cell.style.backgroundColor = 'black';
+            cell.style.color = 'white';
+        }
+    })
+
     rollRecord.push(thisRoll);
   }
   document.getElementById("hash").innerHTML = `Hash: ${sha1(JSON.stringify(rollRecord))}`;
