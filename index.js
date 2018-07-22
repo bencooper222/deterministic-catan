@@ -9,7 +9,7 @@ const fillTable = randomGen => {
   const rollRecord = [];
   for (let i = 0; i < NUMBERS_TO_GENERATE; i++) {
     const cell = table.insertRow(-1).insertCell(-1);
-    const roll = () => Math.floor(randomGen() * 5) + 1;
+    const roll = () => Math.floor(randomGen() * 6) + 1;
     const thisRoll = roll() + roll();
     cell.innerHTML = thisRoll;
     rollRecord.push(thisRoll);
