@@ -1,16 +1,15 @@
 {
   "name": "deterministic-catan",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
     "build": "parcel build index.html",
-    "pretty" : "prettier --write index.js --single-quote"
+    "pretty" : "prettier --write index.js *.md --single-quote"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Benjamin Coper",
+  "license": "MIT",
   "dependencies": {
     "parcel-bundler": "^1.9.7",
     "seedrandom": "^2.4.3",
