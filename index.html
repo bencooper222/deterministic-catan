@@ -13,6 +13,7 @@
 
         #table {
             margin-top: 20px;
+
         }
 
 
@@ -28,28 +29,136 @@
 
         td,
         th {
-            padding: 4px;
+            padding: 6px;
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #hash {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+
+        .float {
+            float: left;
+        }
+
+        #right {
+            margin-left: 10px;
+        }
+
+        .inputWrapper {
+            margin-bottom: 4px;
         }
     </style>
 </head>
 
 <body>
-    <input id="seed" placeholder="Seed me!">
-    <button id="btn">
-        Generate!
-    </button>
-<p id="hash"> </p>
+    <div class="float">
+        <div class="inputWrapper">
+            <input id="seed" placeholder="Seed me!">
+            <button id="generate">
+                Generate!
+            </button>
+        </div>
+        <div class="inputWrapper">
+            <input id="rollTotal" value="15">
 
-    <table id="table">
-        <th>
-            Number
-        </th>
+        </div>
+        <div class="inputWrapper">
+            <input id="numPlayers" value="4">
 
-        <tbody>
+        </div>
+        <p id="hash"> </p>
+        <table id="table">
 
-        </tbody>
+            <tbody>
+                <tr>
+                    <th>
+                        Rolls
+                    </th>
+                </tr>
 
-    </table>
+            </tbody>
+
+        </table>
+    </div>
+    <div id="right" class="float">
+        <table>
+            <thead>
+                <tr>
+                    <th>Result</th>
+                    <th>Normal Chance</th>
+                    <th>Your Chances</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>1</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>2</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>3</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>4</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>5</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>6</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>5</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>4</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>3</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>2</td>
+                    <td class="calcChances"></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>1</td>
+                    <td class="calcChances"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
     <script src="index.js"></script>
 </body>
 
