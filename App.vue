@@ -47,62 +47,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2</td>
-                    <td>2.78%</td>
-                    <td class="calcChances">{{calculatedChances[0] < 0 ? "": calculatedChances[0]}}</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>5.56%</td>
-                    <td class="calcChances">{{calculatedChances[1] < 0 ? "": calculatedChances[1]}}</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>8.33%</td>
-                    <td class="calcChances">{{calculatedChances[2] < 0 ? "": calculatedChances[2]}}</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>11.11%</td>
-                    <td class="calcChances">{{calculatedChances[3] < 0 ? "": calculatedChances[3]}}</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>13.89%</td>
-                    <td class="calcChances">{{calculatedChances[4] < 0 ? "": calculatedChances[4]}}</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>16.67%</td>
-                    <td class="calcChances">{{calculatedChances[5] < 0 ? "": calculatedChances[5]}}</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>13.89%</td>
-                    <td class="calcChances">{{calculatedChances[6] < 0 ? "": calculatedChances[6]}}</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>11.11%</td>
-                    <td class="calcChances">{{calculatedChances[7] < 0 ? "": calculatedChances[7]}}</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>8.33%</td>
-                    <td class="calcChances">{{calculatedChances[8] < 0 ? "": calculatedChances[8]}}</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>5.56%</td>
-                    <td class="calcChances">{{calculatedChances[9] < 0 ? "": calculatedChances[9]}}</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>2.78%</td>
-                    <td class="calcChances">{{calculatedChances[10] < 0 ? "": calculatedChances[10]}}</td>
-                </tr>
-  
+                <template v-for="chanceObj in calculatedChances">
+                    <tr :key="Math.random() + chanceObj.actual + chanceObj.normal">
+                        <td>{{chanceObj.roll}}</td>
+                        <td>{{chanceObj.normal}}</td>
+                        <td>{{chanceObj.actual}}</td>
+                        </tr>
+                    </template>  
             </tbody>
         </table>
     </div>
@@ -111,12 +62,12 @@
 </template>
 
 <script>
-import sha1 from 'sha1';
-import seedrandom from 'seedrandom';
+import sha1 from "sha1";
+import seedrandom from "seedrandom";
 
 const NUMBERS_TO_GENERATE = 100;
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       normalRollDistribution: {
@@ -133,39 +84,33 @@ export default {
         12: 1
       },
       generatedRolls: [],
-      generatedHash: '',
-      seed: '',
+      generatedHash: "",
+      seed: "",
       rolls: 10,
       players: 4
     };
   },
   computed: {
     calculatedChances: function() {
-      return this.generatedRolls
-        .filter(el => !el.isUsed)
-        .slice(0, this.rolls)
-        .reduce(
-          (acc, roll) => {
-            acc[roll.num - 2] += 36 / this.rolls;
-            return acc;
-          },
-          [
-            this.players - 1,
-            (this.players - 1) * 2,
-            (this.players - 1) * 3,
-            (this.players - 1) * 4,
-            (this.players - 1) * 5,
-            (this.players - 1) * 6,
-            (this.players - 1) * 5,
-            (this.players - 1) * 4,
-            (this.players - 1) * 3,
-            (this.players - 1) * 2,
-            this.players - 1
-          ]
-        )
-        .map(el => {
-          return `${((100 * el) / (this.players * 36)).toFixed(2)}%`;
-        });
+      const toPercent = decimal => `${(decimal * 100).toFixed(2)}%`;
+      const normalChances = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1];
+      return this.generatedRolls.length === 0
+        ? normalChances.map((chance, i) => {
+            return { roll: i + 2, normal: toPercent(chance / 36) };
+          })
+        : this.generatedRolls
+            .filter(el => !el.isUsed)
+            .slice(0, this.rolls)
+            .reduce((acc, roll) => {
+              acc[roll.num - 2] += 36 / this.rolls;
+              return acc;
+            }, normalChances.map(chance => (this.players - 1) * chance))
+            .map(el => {
+              return toPercent(el / (this.players * 36));
+            })
+            .map((percent, i) => {
+              return { roll: i + 2, actual: percent, normal: normalChances[i] };
+            });
     }
   },
   methods: {
@@ -214,7 +159,7 @@ th {
 }
 
 #hash {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 14px;
 }
 
