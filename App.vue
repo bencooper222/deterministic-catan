@@ -62,7 +62,6 @@
 </template> 
 
 <script>
-/* eslint-disable */
 import sha1 from 'sha1';
 import seedrandom from 'seedrandom';
 
