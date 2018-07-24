@@ -71,19 +71,6 @@ export default {
   name: 'app',
   data() {
     return {
-      normalRollDistribution: {
-        2: 1,
-        3: 2,
-        4: 3,
-        5: 4,
-        6: 5,
-        7: 6,
-        8: 5,
-        9: 4,
-        10: 3,
-        11: 2,
-        12: 1
-      },
       generatedRolls: [],
       generatedHash: '',
       seed: '',
@@ -124,8 +111,7 @@ export default {
       const roll = () => Math.floor(randomGen() * 6) + 1;
 
       for (let i = 0; i < NUMBERS_TO_GENERATE; i++) {
-        const thisRoll = roll() + roll();
-        this.generatedRolls.push({ num: thisRoll, isUsed: false });
+        this.generatedRolls.push({ num: roll() + roll(), isUsed: false });
       }
 
       this.generatedHash = sha1(JSON.stringify(this.generatedRolls));
