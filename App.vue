@@ -110,7 +110,11 @@ export default {
               return toPercent(el / (this.players * 36));
             })
             .map((percent, i) => {
-              return { roll: i + 2, actual: percent, normal: normalChances[i] };
+              return {
+                roll: i + 2,
+                actual: percent,
+                normal: toPercent(normalChances[i] / 36)
+              };
             });
     }
   },
