@@ -30,7 +30,7 @@
             
                 <template v-for="roll in generatedRolls" >
                   <tr :key= "roll.num + Math.random()">
-                    <td v-bind:class="{blackCell: roll.isUsed}" v-on:click="roll.isUsed = !roll.isUsed">{{roll.num}}</td>
+                    <td :class="{blackCell: roll.isUsed}" v-on:click="roll.isUsed = !roll.isUsed">{{roll.num}}</td>
                     </tr>
                   </template>
             </tbody>
@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 <template v-for="chanceObj in calculatedChances">
-                    <tr :key="Math.random() + chanceObj.actual + chanceObj.normal">
+                    <tr :key="Math.random() + chanceObj.normal">
                         <td>{{chanceObj.roll}}</td>
                         <td>{{chanceObj.normal}}</td>
                         <td>{{chanceObj.actual}}</td>
