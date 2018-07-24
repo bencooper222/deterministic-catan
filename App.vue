@@ -141,31 +141,31 @@ export default {
   },
   computed: {
     calculatedChances: function() {
-      const otherPlayerChances = [
-        this.players - 1,
-        (this.players - 1) * 2,
-        (this.players - 1) * 3,
-        (this.players - 1) * 4,
-        (this.players - 1) * 5,
-        (this.players - 1) * 6,
-        (this.players - 1) * 5,
-        (this.players - 1) * 4,
-        (this.players - 1) * 3,
-        (this.players - 1) * 2,
-        this.players - 1
-      ];
-
-      const rtn = this.generatedRolls
+      return this.generatedRolls
         .filter(el => !el.isUsed)
         .slice(0, this.rolls)
-        .reduce((acc, roll) => {
-          acc[roll.num - 2] += 36 / this.rolls;
-          return acc;
-        }, otherPlayerChances);
-
-      return rtn.map(el => {
-        return `${(100 * el / (this.players * 36)).toFixed(2)}%`;
-      });
+        .reduce(
+          (acc, roll) => {
+            acc[roll.num - 2] += 36 / this.rolls;
+            return acc;
+          },
+          [
+            this.players - 1,
+            (this.players - 1) * 2,
+            (this.players - 1) * 3,
+            (this.players - 1) * 4,
+            (this.players - 1) * 5,
+            (this.players - 1) * 6,
+            (this.players - 1) * 5,
+            (this.players - 1) * 4,
+            (this.players - 1) * 3,
+            (this.players - 1) * 2,
+            this.players - 1
+          ]
+        )
+        .map(el => {
+          return `${(100 * el / (this.players * 36)).toFixed(2)}%`;
+        });
     }
   },
   methods: {
