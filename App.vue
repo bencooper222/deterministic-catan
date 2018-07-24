@@ -111,12 +111,12 @@
 </template>
 
 <script>
-import sha1 from "sha1";
-import seedrandom from "seedrandom";
+import sha1 from 'sha1';
+import seedrandom from 'seedrandom';
 
 const NUMBERS_TO_GENERATE = 100;
 export default {
-  name: "app",
+  name: 'app',
   data() {
     return {
       normalRollDistribution: {
@@ -133,8 +133,8 @@ export default {
         12: 1
       },
       generatedRolls: [],
-      generatedHash: "",
-      seed: "",
+      generatedHash: '',
+      seed: '',
       rolls: 10,
       players: 4
     };
@@ -164,7 +164,7 @@ export default {
           ]
         )
         .map(el => {
-          return `${(100 * el / (this.players * 36)).toFixed(2)}%`;
+          return `${((100 * el) / (this.players * 36)).toFixed(2)}%`;
         });
     }
   },
@@ -214,7 +214,7 @@ th {
 }
 
 #hash {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
 }
 
