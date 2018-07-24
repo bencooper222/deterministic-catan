@@ -95,10 +95,12 @@ export default {
     calculatedChances: function() {
       const toPercent = decimal => `${(decimal * 100).toFixed(2)}%`;
       const normalChances = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1];
+
       return this.generatedRolls.length === 0
-        ? normalChances.map((chance, i) => {
-            return { roll: i + 2, normal: toPercent(chance / 36) };
-          })
+        ? normalChances.map((chance, i) => ({
+            roll: i + 2,
+            normal: toPercent(chance / 36)
+          }))
         : this.generatedRolls
             .filter(el => !el.isUsed)
             .slice(0, this.rolls)
@@ -106,16 +108,12 @@ export default {
               acc[roll.num - 2] += 36 / this.rolls;
               return acc;
             }, normalChances.map(chance => (this.players - 1) * chance))
-            .map(el => {
-              return toPercent(el / (this.players * 36));
-            })
-            .map((percent, i) => {
-              return {
-                roll: i + 2,
-                actual: percent,
-                normal: toPercent(normalChances[i] / 36)
-              };
-            });
+            .map(el => toPercent(el / (this.players * 36)))
+            .map((percent, i) => ({
+              roll: i + 2,
+              actual: percent,
+              normal: toPercent(normalChances[i] / 36)
+            }));
     }
   },
   methods: {
