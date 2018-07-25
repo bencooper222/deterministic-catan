@@ -113,7 +113,7 @@ export default {
         this.generatedRolls.push({ num: roll() + roll(), isUsed: false });
       }
 
-      this.generatedHash = sha1(JSON.stringify(this.generatedRolls));
+      this.generatedHash = `sha1-${sha1(JSON.stringify(this.generatedRolls))}`;
     }
   }
 };
@@ -148,7 +148,7 @@ th {
 
 #hash {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .float {
