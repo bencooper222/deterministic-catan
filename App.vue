@@ -70,7 +70,7 @@ export default {
       generatedHash: '',
       seed: randomWords(),
       rolls: 10,
-      players: 4
+      players: 4,
     };
   },
   mounted: function() {
@@ -84,7 +84,7 @@ export default {
       return this.generatedRolls.length === 0
         ? normalChances.map((chance, i) => ({
             roll: i + 2,
-            normal: toPercent(chance / 36)
+            normal: toPercent(chance / 36),
           }))
         : this.generatedRolls
             .filter(el => !el.isUsed)
@@ -97,9 +97,9 @@ export default {
             .map((percent, i) => ({
               roll: i + 2,
               actual: percent,
-              normal: toPercent(normalChances[i] / 36)
+              normal: toPercent(normalChances[i] / 36),
             }));
-    }
+    },
   },
   methods: {
     fillTable: function() {
@@ -123,8 +123,8 @@ export default {
       if (/Mobi/.test(navigator.userAgent)) {
         location.hash = 'rnged';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
