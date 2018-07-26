@@ -43,7 +43,7 @@
                 </thead>
                 <tbody>
                     <template v-for="chanceObj in calculatedChances">
-                        <tr :key="Math.random() + chanceObj.normal">
+                        <tr :key="chanceObj.roll">
                             <td>{{chanceObj.roll}}</td>
                             <td>{{chanceObj.normal}}</td>
                             <td>{{chanceObj.actual}}</td>
