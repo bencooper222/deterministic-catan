@@ -128,7 +128,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 table {
   border-collapse: collapse;
 }
