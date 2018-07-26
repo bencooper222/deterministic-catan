@@ -3,7 +3,6 @@
         <div class="card" id="rnged">
             <div class="inputWrapper">
                 <input v-model="seed" placeholder="Seed me!">
-
                 <button v-on:click="fillTable">
                     Generate!
                 </button>
@@ -11,16 +10,13 @@
             <div class="inputWrapper">
                 <input v-model="rolls">
                 <label>Use next ? rolls</label>
-
             </div>
             <div class="inputWrapper">
                 <input v-model="players">
                 <label>Total players</label>
-
             </div>
             <p v-if="this.generatedHash !== ''" id="hash">Hash: {{generatedHash}}</p>
             <table id="table">
-
                 <tbody>
                     <tr>
                         <th>
@@ -34,7 +30,6 @@
                         </tr>
                     </template>
                 </tbody>
-
             </table>
         </div>
         <div id="chanceTable" class="card">
@@ -57,7 +52,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 </template>
 
