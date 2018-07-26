@@ -129,10 +129,6 @@ export default {
 </script>
 
 <style scoped>
-#table {
-  margin-top: 20px;
-}
-
 table {
   border-collapse: collapse;
 }
@@ -159,10 +155,6 @@ th {
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
 }
-
-/* .float {
-  float: left;
-} */
 
 .inputWrapper {
   margin-bottom: 4px;
