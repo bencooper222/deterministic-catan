@@ -1,69 +1,71 @@
 <template>
-<div>
- <div class="float">
-        <div class="inputWrapper">
-            <input v-model="seed" placeholder="Seed me!">
+    <div class="scrolling-wrapper" v-touch:swipe.left="swipeleft" v-touch:swipe.right="swipeRight">
+        <div class="card" id="rnged">
+            <div class="inputWrapper">
+                <input v-model="seed" placeholder="Seed me!">
 
-            <button v-on:click="fillTable">
-                Generate!
-            </button>
-        </div>
-        <div class="inputWrapper">
-            <input v-model="rolls" >
-            <label>Use next ? rolls</label>
+                <button v-on:click="fillTable">
+                    Generate!
+                </button>
+            </div>
+            <div class="inputWrapper">
+                <input v-model="rolls">
+                <label>Use next ? rolls</label>
 
-        </div>
-        <div class="inputWrapper">
-            <input v-model="players" >
-            <label>Total players</label>
+            </div>
+            <div class="inputWrapper">
+                <input v-model="players">
+                <label>Total players</label>
 
-        </div>
-        <p v-if="this.generatedHash !== ''" id="hash">Hash: {{generatedHash}}</p>
-        <table id="table">
+            </div>
+            <p v-if="this.generatedHash !== ''" id="hash">Hash: {{generatedHash}}</p>
+            <table id="table">
 
-            <tbody>
-                <tr>
-                    <th>
-                        Rolls
-                    </th>
-                </tr>
-            
-                <template v-for="roll in generatedRolls" >
-                  <tr :key= "roll.num + Math.random()">
-                    <td :class="{blackCell: roll.isUsed}" v-on:click="roll.isUsed = !roll.isUsed">{{roll.num}}</td>
+                <tbody>
+                    <tr>
+                        <th>
+                            Rolls
+                        </th>
                     </tr>
-                  </template>
-            </tbody>
 
-        </table>
-    </div>
-    <div id="right" class="float">
-        <table>
-            <thead>
-                <tr>
-                    <th>Result</th>
-                    <th>Normal Chance</th>
-                    <th>Adjusted Chances</th>
-                </tr>
-            </thead>
-            <tbody>
-                <template v-for="chanceObj in calculatedChances">
-                    <tr :key="Math.random() + chanceObj.normal">
-                        <td>{{chanceObj.roll}}</td>
-                        <td>{{chanceObj.normal}}</td>
-                        <td>{{chanceObj.actual}}</td>
+                    <template v-for="roll in generatedRolls">
+                        <tr :key="roll.num + Math.random()">
+                            <td :class="{blackCell: roll.isUsed}" v-on:click="roll.isUsed = !roll.isUsed">{{roll.num}}</td>
                         </tr>
-                    </template>  
-            </tbody>
-        </table>
-    </div>
+                    </template>
+                </tbody>
 
-</div>
-</template> 
+            </table>
+        </div>
+        <div id="chanceTable" class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Result</th>
+                        <th>Normal Chance</th>
+                        <th>Adjusted Chances</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template v-for="chanceObj in calculatedChances">
+                        <tr :key="Math.random() + chanceObj.normal">
+                            <td>{{chanceObj.roll}}</td>
+                            <td>{{chanceObj.normal}}</td>
+                            <td>{{chanceObj.actual}}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</template>
+
 
 <script>
 import sha1 from 'sha1';
 import seedrandom from 'seedrandom';
+import randomWords from 'random-words';
 
 const NUMBERS_TO_GENERATE = 100;
 export default {
@@ -72,10 +74,13 @@ export default {
     return {
       generatedRolls: [],
       generatedHash: '',
-      seed: '',
+      seed: randomWords(),
       rolls: 10,
       players: 4
     };
+  },
+  mounted: function() {
+    this.fillTable();
   },
   computed: {
     calculatedChances: function() {
@@ -114,6 +119,16 @@ export default {
       }
 
       this.generatedHash = `sha1-${sha1(JSON.stringify(this.generatedRolls))}`;
+    },
+    swipeleft: function() {
+      if (/Mobi/.test(navigator.userAgent)) {
+        location.hash = 'chanceTable';
+      }
+    },
+    swipeRight: function() {
+      if (/Mobi/.test(navigator.userAgent)) {
+        location.hash = 'rnged';
+      }
     }
   }
 };
@@ -151,13 +166,9 @@ th {
   font-size: 15px;
 }
 
-.float {
+/* .float {
   float: left;
-}
-
-#right {
-  margin-left: 10px;
-}
+} */
 
 .inputWrapper {
   margin-bottom: 4px;
@@ -166,5 +177,15 @@ th {
 .blackCell {
   background-color: black;
   color: white;
+}
+
+.scrolling-wrapper {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.card {
+  display: inline-block;
+  vertical-align: top;
 }
 </style>
