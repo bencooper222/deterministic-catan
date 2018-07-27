@@ -108,21 +108,16 @@ export default {
       const randomGen = new seedrandom(this.seed);
       const roll = () => Math.floor(randomGen() * 6) + 1;
 
-      for (let i = 0; i < NUMBERS_TO_GENERATE; i++) {
+      for (let i = 0; i < NUMBERS_TO_GENERATE; i++)
         this.generatedRolls.push({ num: roll() + roll(), isUsed: false });
-      }
 
       this.generatedHash = `sha1-${sha1(JSON.stringify(this.generatedRolls))}`;
     },
     swipeleft: function() {
-      if (/Mobi/.test(navigator.userAgent)) {
-        location.hash = 'chanceTable';
-      }
+      if (/Mobi/.test(navigator.userAgent)) location.hash = 'chanceTable';
     },
     swipeRight: function() {
-      if (/Mobi/.test(navigator.userAgent)) {
-        location.hash = 'rnged';
-      }
+      if (/Mobi/.test(navigator.userAgent)) location.hash = 'rnged';
     },
   },
 };
