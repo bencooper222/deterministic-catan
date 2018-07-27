@@ -113,10 +113,10 @@ export default {
 
       this.generatedHash = `sha1-${sha1(JSON.stringify(this.generatedRolls))}`;
     },
-    swipeleft: function() {
+    swipeleft: () => {
       if (/Mobi/.test(navigator.userAgent)) location.hash = 'chanceTable';
     },
-    swipeRight: function() {
+    swipeRight: () => {
       if (/Mobi/.test(navigator.userAgent)) location.hash = 'rnged';
     },
   },

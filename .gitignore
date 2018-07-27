@@ -63,3 +63,6 @@ typings/
 # Parcel cache/build
 dist/
 .cache/
+
+# Macs suck
+.DS_STORE
