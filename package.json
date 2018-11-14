@@ -12,7 +12,8 @@
   "author": "Benjamin Cooper",
   "license": "MIT",
   "dependencies": {
-    "parcel-bundler": "^1.9.7",
+    "@babel/core": "^7.1.6",
+    "parcel-bundler": "^1.10.3",
     "random-words": "^1.1.0",
     "seedrandom": "^2.4.3",
     "sha1": "^1.1.1",
